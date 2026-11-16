@@ -1,0 +1,24 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "WriteTestObjectsToSource",
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::YOUR-SOURCE-BUCKET/replication-tests/*",
+        "arn:aws:s3:::YOUR-SOURCE-BUCKET/results/*"
+      ]
+    },
+    {
+      "Sid": "CheckReplicatedObjects",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": "arn:aws:s3:::YOUR-DESTINATION-BUCKET/replication-tests/*"
+    }
+  ]
+}

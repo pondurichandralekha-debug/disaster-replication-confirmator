@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReplicaGuard | Disaster-Proof Replication Confirmator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">✦</div>
+        <div><strong>REPLICAGUARD</strong><span>DISASTER RECOVERY</span></div>
+      </div>
+      <div class="nav-label">WORKSPACE</div>
+      <a class="nav-item active" href="#overview"><span>▦</span> Overview</a>
+      <a class="nav-item" href="#device"><span>◉</span> Device simulator</a>
+      <a class="nav-item" href="#storage"><span>▤</span> S3 replication</a>
+      <a class="nav-item" href="#activity"><span>≡</span> Activity logs</a>
+      <div class="sidebar-bottom">
+        <div class="lab-card"><span class="pulse"></span><div><b>Demo environment</b><small>Software simulation mode</small></div></div>
+        <div class="user-mini"><div class="avatar">RG</div><div><b>Replication Admin</b><small>Project workspace</small></div></div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="overview">
+      <header class="topbar">
+        <div><div class="eyebrow">AWS CLOUD MONITORING</div><h1>Replication overview</h1><p>Monitor S3 replication health and confirm disaster-recovery test events.</p></div>
+        <div class="top-actions"><span class="environment"><i></i> AWS CONNECTED</span><div class="date-chip" id="currentDate">--</div></div>
+      </header>
+
+      <section class="welcome-row">
+        <div><h2>Your data, protected across regions.</h2><p>Run a test to create a real S3 test object and verify that replication reaches the destination bucket.</p></div>
+        <button class="primary-btn" id="runTestBtn"><span>▶</span> RUN REPLICATION TEST</button>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card"><div class="stat-top"><span>REPLICATION STATUS</span><span class="stat-icon blue">↗</span></div><strong id="overallStatus">Ready</strong><small id="statusDetail">Waiting for a test request</small></article>
+        <article class="stat-card"><div class="stat-top"><span>SUCCESSFUL TESTS</span><span class="stat-icon green">✓</span></div><strong id="successCount">0</strong><small>Confirmed in this session</small></article>
+        <article class="stat-card"><div class="stat-top"><span>FAILED TESTS</span><span class="stat-icon red">!</span></div><strong id="failedCount">0</strong><small>Detected in this session</small></article>
+        <article class="stat-card"><div class="stat-top"><span>LAST TEST DURATION</span><span class="stat-icon violet">◷</span></div><strong id="duration">--</strong><small>Latest simulation</small></article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel replication-panel" id="storage">
+          <div class="panel-heading"><div><span class="eyebrow">CROSS-REGION STATUS</span><h3>S3 replication pipeline</h3></div><span class="tag neutral" id="pipelineTag">IDLE</span></div>
+          <div class="region-flow">
+            <div class="region-card"><div class="bucket-icon">▣</div><div><b>Source bucket</b><strong>S3 source bucket</strong><small>US East (N. Virginia)</small></div><span class="check">✓</span></div>
+            <div class="flow-line"><span id="flowDot"></span><small id="flowLabel">Awaiting test</small></div>
+            <div class="region-card"><div class="bucket-icon destination">▣</div><div><b>Destination bucket</b><strong>S3 destination bucket</strong><small>US West (Oregon)</small></div><span class="check">✓</span></div>
+          </div>
+          <div class="progress-wrap"><div class="progress-label"><span>Replication progress</span><b id="progressText">0%</b></div><div class="progress-track"><div id="progressBar"></div></div></div>
+          <div class="note"><span>ⓘ</span> AWS mode: the dashboard sends each test to Lambda, which creates a test object in the source S3 bucket and confirms whether it appears in the destination bucket.</div>
+        </article>
+
+        <article class="panel device-panel" id="device">
+          <div class="panel-heading"><div><span class="eyebrow">VIRTUAL HARDWARE</span><h3>ESP32 device simulator</h3></div><span class="tag success"><i></i> ONLINE</span></div>
+          <div class="device-visual">
+            <div class="esp-board"><div class="board-chip">ESP32</div><div class="board-pins"></div><div class="board-label">DEVKIT SIMULATOR</div></div>
+            <div class="device-controls"><div class="indicator-row"><div class="led" id="led"></div><div><b>Confirmation LED</b><small id="ledText">OFF · Waiting for result</small></div></div><div class="indicator-row"><div class="buzzer" id="buzzer">♪</div><div><b>Buzzer confirmation</b><small id="buzzerText">Silent · No confirmation yet</small></div></div></div>
+          </div>
+          <button class="secondary-btn" id="deviceButton"><span class="button-dot"></span> PRESS VIRTUAL ESP32 BUTTON</button>
+          <p class="microcopy">The virtual button starts the same demo test as the main action.</p>
+        </article>
+      </section>
+
+      <section class="lower-grid">
+        <article class="panel services-panel">
+          <div class="panel-heading"><div><span class="eyebrow">CONNECTED SERVICES</span><h3>Service health</h3></div><span class="tag neutral">AWS</span></div>
+          <div class="service-row"><div class="service-logo s3">S3</div><div><b>Amazon S3</b><small>Source + destination replication</small></div><span class="service-state">Configured</span></div>
+          <div class="service-row"><div class="service-logo lambda">λ</div><div><b>AWS Lambda</b><small>Replication confirmation processor</small></div><span class="service-state">Ready</span></div>
+          <div class="service-row"><div class="service-logo iot">↗</div><div><b>Lambda Function URL</b><small>Browser-to-Lambda HTTPS endpoint</small></div><span class="service-state">Connected</span></div>
+          <p class="microcopy">The dashboard uses only Amazon S3 and AWS Lambda. The ESP32 panel remains a virtual confirmation indicator for the project demo.</p>
+        </article>
+        <article class="panel activity-panel" id="activity">
+          <div class="panel-heading"><div><span class="eyebrow">EVENT MONITOR</span><h3>Recent activity</h3></div><button class="text-btn" id="clearLogs">Clear logs</button></div>
+          <div class="log-list" id="logList"><div class="empty-state"><span>≡</span><b>No activity yet</b><small>Run a replication test to see events here.</small></div></div>
+        </article>
+      </section>
+      <footer>ReplicaGuard <span>•</span> Disaster-Proof Replication Confirmator <span>•</span> AWS S3 + Lambda</footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>

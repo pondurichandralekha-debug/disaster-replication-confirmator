@@ -1,0 +1,8 @@
+{
+  "project": "Disaster Replication Confirmator",
+  "test": {
+    "source_bucket": "YOUR-SOURCE-BUCKET",
+    "destination_bucket": "YOUR-DESTINATION-BUCKET",
+    "purpose": "Create a unique S3 test object and confirm that it reaches the destination bucket."
+  }
+}
